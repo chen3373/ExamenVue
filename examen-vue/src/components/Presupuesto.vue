@@ -2,14 +2,14 @@
     <div id="app">        
         <p>
             Indica tu Presupuesto
-            <input type="number" v-model="presupuesto">
+            <input type="number" v-model="budget">
         </p>
-        <p v-if="presupuesto == 0">
-            Debe indicar un presupuesto mayor a 0
+        <p v-if="budget === 0">
+            Debe indicar un presupuesto mayor a 0€
         </p>
 
-        <p v-if="presupuesto > 0">
-            <h2>Su Presupuesto es {{ presupuesto }}</h2>
+        <p v-if="budget > 0">
+            <h2>Su Presupuesto es {{ budget }}€</h2>
         </p>
         
     </div>
@@ -18,8 +18,14 @@
 <script setup>
 import { ref } from 'vue';
 
-const presupuesto = ref(0);
+const budget = ref(0);
 
+const loadBudget = () => {
+  const savedBudget = localStorage.getItem('budget');
+  if (savedBudget) {
+    budget.value = JSON.parse(savedBudget);
+  }
+};
 </script>
     
 <style scoped>
